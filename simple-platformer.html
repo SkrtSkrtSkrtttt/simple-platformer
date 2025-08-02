@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+    <title>Platform test </title>
+	<h1> Small Platform Canvas </h1> 
+</head>
+<body background="https://www.solidbackgrounds.com/images/1920x1080/1920x1080-amber-orange-solid-color-background.jpg" >
+ <canvas id="canvas" style="border:1px solid #000"></canvas>
+ 
+<script>
+
+
+var canvas=document.getElementById("canvas"),
+ctx = canvas.getContext("2d"),
+width = 1000,
+height=800,
+player={
+x:width/2,
+y: height-5,
+width: 15,
+height: 15,
+speed:3,
+VelX:0,
+VelY:0,
+jumping: false
+},
+keys=[];
+friction=0.7;
+gravity=0.3;
+player.VelX=friction;
+canvas.width=width;
+canvas.height= height;
+
+
+document.body.addEventListener("keydown",function (e) {
+keys[e.keyCode]=true;
+});
+document.body.addEventListener("keyup",function (e) {
+keys[e.keyCode]=false;
+});
+
+
+function update(){
+if (keys[38] || keys [32] ){
+if (!player.jumping) {
+player.jumping=true;
+player.VelY=-player.speed*2;
+}
+}
+if (keys[39]) {
+if (player.VelX < player.speed) {
+player.VelX++;
+}
+}
+if (keys [37]) {
+if (player.VelX > -player.speed) {
+player.VelX--;
+}
+}
+
+
+
+player.VelX *= friction;
+player.VelY += gravity;
+player.x += player.VelX;
+player.y += player.VelY;
+
+
+
+
+if (player.y >=height-player.height) {
+player.y= height-player.height;
+player.jumping=false;
+}
+
+if (player.x >= width-player.width) {
+player.x=width-player.width;
+} else if (player.x <=0) {
+player.x=0;
+}
+
+
+
+ctx.clearRect(0,0,width,height);
+ctx.fillStyle= "blue";
+ctx.fillRect(player.x, player.y, player.width, player.height);
+requestAnimationFrame(update);
+}
+
+
+
+
+window.addEventListener("load", function(){
+  update();
+});
+
+
+</script>
+</body>
+</html>
