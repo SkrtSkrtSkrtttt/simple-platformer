@@ -9,7 +9,7 @@ A small platform-style animation built with HTML5 Canvas and JavaScript. Created
 - Background styling using external URL
 
 ## 🚀 How to Run
-Just open `index.html` in a browser.
+Just open `simple-platformer.html` in a browser.
 
 ## 🎓 What I Learned
 - HTML5 Canvas drawing
